@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zalren SMP | Official Realm</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --gold: #ffcc00; 
+    --royal-blue: #004e92;
+    --dark-king: #050a0f;
+    --border-gold: rgba(255, 204, 0, 0.4);
+}
+
+html, body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--dark-king);
+    color: #e0e0e0;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, #enterBtn {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 2px;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, #102a43 0%, #050a0f 100%);
+    z-index: -1;
+}
+
+/* ENTRY SCREEN */
+#entry {
+    position: fixed;
+    width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    flex-direction: column;
+    z-index: 100;
+    background: rgba(0,0,0,0.9);
+    transition: 1s;
+}
+
+.logo-king {
+    width: 280px;
+    filter: drop-shadow(0 0 25px var(--gold));
+    margin-bottom: 10px;
+}
+
+#enterBtn {
+    margin-top: 30px;
+    padding: 15px 50px;
+    font-size: 20px;
+    background: linear-gradient(45deg, #b8860b, #ffcc00);
+    color: #000;
+    border: none;
+    font-weight: 900;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    transition: 0.4s;
+}
+
+#enterBtn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px var(--gold);
+}
+
+/* NAVIGATION */
+#nav {
+    display: none;
+    position: fixed;
+    top: 0; width: 100%;
+    background: rgba(5, 10, 15, 0.95);
+    border-bottom: 2px solid var(--gold);
+    padding: 15px 0;
+    text-align: center;
+    z-index: 50;
+}
+
+#nav button {
+    background: none; border: none;
+    color: #fff; font-family: 'Cinzel';
+    margin: 0 15px; font-size: 16px;
+    cursor: pointer; transition: 0.3s;
+}
+
+#nav button:hover {
+    color: var(--gold);
+    text-shadow: 0 0 10px var(--gold);
+}
+
+/* MAIN CONTENT */
+#main {
+    display: none;
+    padding-top: 120px;
+    padding-bottom: 80px;
+    text-align: center;
+}
+
+.page { display: none; animation: slideUp 0.8s ease; }
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* CONTAINERS */
+.royal-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid var(--border-gold);
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 40px;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(255, 204, 0, 0.1);
+}
+
+.royal-box::before, .royal-box::after {
+    content: "◈";
+    position: absolute;
+    color: var(--gold);
+    font-size: 20px;
+}
+.royal-box::before { top: 5px; left: 10px; }
+.royal-box::after { bottom: 5px; right: 10px; }
+
+/* IP BOX */
+.ip-banner {
+    display: inline-block;
+    background: #000;
+    padding: 20px 40px;
+    border: 1px solid var(--gold);
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.ip-banner:hover {
+    background: var(--royal-blue);
+    border-color: #fff;
+}
+
+h1 { font-size: 3rem; color: #fff; margin-bottom: 10px; }
+h2 { color: var(--gold); margin-top: 40px; border-bottom: 2px solid var(--gold); display: block; padding-bottom: 10px; text-align: center; }
+h3 { color: var(--gold); margin-top: 20px; font-size: 1.2rem; }
+.gold-glow { color: var(--gold); text-shadow: 0 0 15px var(--gold); }
+
+.feature-list { list-style: none; padding: 0; font-size: 1.2rem; text-align: left; max-width: 500px; margin: auto; }
+.feature-list li { margin: 15px 0; border-left: 3px solid var(--gold); padding: 10px; background: rgba(255,255,255,0.02); }
+
+.rule-group { text-align: left; margin-bottom: 50px; }
+.rule-group p { margin: 10px 0; font-size: 16px; color: #eee; line-height: 1.6; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px;}
+.rule-desc { color: #aaa !important; font-size: 14px !important; margin-top: -8px !important; margin-bottom: 15px !important; padding-left: 20px; border-bottom: none !important; }
+
+</style>
+</head>
+<body>
+
+<div id="entry">
+    <img src="image_4fb64b.png" alt="Zalren Logo" class="logo-king">
+    <h1 style="margin:0;">ZALREN <span class="gold-glow">SMP</span></h1>
+    <p style="font-family:'Cinzel'; letter-spacing:3px;">THE ADVENTURE BEGINS</p>
+    <button id="enterBtn" onclick="enterSite()">ENTER THE REALM</button>
+</div>
+
+<div id="nav">
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('features')">Features</button>
+    <button onclick="showPage('shop')">Store</button>
+    <button onclick="showPage('rules')">The Laws</button>
+</div>
+
+<div id="main">
+
+    <div id="home" class="page">
+        <h1>Welcome to <span class="gold-glow">Zalren</span></h1>
+        <div class="royal-box">
+            <p style="font-size: 1.3rem;">The ultimate survival experience awaits.</p>
+            <div class="ip-banner" onclick="copyIP()">
+                <small style="color:var(--gold); font-weight:bold; text-transform:uppercase;">Click to Copy IP</small><br>
+                <span id="serverIP" style="font-size:28px; font-family:'Cinzel';">play.zalrensmps.in</span>
+            </div>
+            <p id="copyStatus" style="color:var(--gold); height:20px; margin-top:10px;"></p>
+        </div>
+    </div>
+
+    <div id="features" class="page">
+        <h1>Server Features</h1>
+        <div class="royal-box">
+            <ul class="feature-list">
+                <li>✔ Friendly and active community</li>
+                <li>✔ Survival gameplay with progression</li>
+                <li>✔ PvP, events, and custom content</li>
+                <li>✔ Epic Conquests & Massive Battles</li>
+                <li>✔ Royal Economy & Trading</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="shop" class="page">
+        <h1>Webstore</h1>
+        <div class="royal-box">
+            <p>Support the realm and claim your rewards.</p>
+            <a href="https://zalrensmp.tebex.io/" target="_blank" 
+               style="display:inline-block; margin-top:20px; color:var(--gold); font-size:24px; text-decoration:none; border: 1px solid var(--gold); padding: 10px 30px; font-family:'Cinzel';">
+                VISIT STORE
+            </a>
+        </div>
+    </div>
+
+    <div id="rules" class="page">
+        <h1>The Sacred Laws</h1>
+        <div class="royal-box">
+            
+            <div class="rule-group">
+                <h2>Server Rules 💎</h2>
+                <p>• No IRL / Cross-Trading</p>
+                <p>• No Hacking / Cheating</p>
+                <p>• No Bug Exploits</p>
+                <p>• No Doxxing</p>
+                <p>• No Spamming</p>
+                <p>• No NSFW</p>
+                <p>• No Abusive Languages</p>
+                <p>• No Advertisements</p>
+                <p>• No Death Threats</p>
+                <p>• No vehicle entities In PVP Zones</p>
+                <p>• No Impersonation of other players / staff</p>
+                <p>• No Ban evading</p>
+                <p>• No Naked Killing</p>
+            </div>
+
+            <div class="rule-group">
+                <h2>Client Rules 📖</h2>
+                <p>• No Hack Clients</p>
+                <p>• No Movement Mods</p>
+                <p>• No Itemscroller / mouse tweak</p>
+                <p>• No Radar / Minimap / WorldMap</p>
+                <p>• No ESP (Any type)</p>
+                <p>• No Freecam / ReplayMod / Spectator Mods</p>
+                <p>• No accurate block placement</p>
+                <p>• No Macros, Scripts, Auto Clickers</p>
+                <p>• No Crystal Optimizers (Except Marlow/Hero anchor)</p>
+                <p>• No X-ray Mod / Resourcepack</p>
+                <p>• No Bridging Mods (Ex: Bedrock Bridging for Java)</p>
+                <p>• No Inventory Profile Next</p>
+                <p>• No ProfileMacros</p>
+            </div>
+
+            <div class="rule-group">
+                <h2>Discord Rules 🔥</h2>
+                
+                <h3>1. Be Respectful</h3>
+                <p class="rule-desc">No bullying, hate, or rude behaviour. Treat everyone kindly.</p>
+
+                <h3>2. Show Mutual Respect</h3>
+                <p class="rule-desc">Treat all players with basic respect. No racism, discrimination, targeted harassment, or toxic behavior.</p>
+
+                <h3>3. No Spam or Drama</h3>
+                <p class="rule-desc">Don’t flood chats, troll, or start arguments.</p>
+
+                <h3>4. Keep It Clean</h3>
+                <p class="rule-desc">No NSFW content, offensive/racial jokes, or heavy swearing.</p>
+
+                <h3>5. Use Channels Right</h3>
+                <p class="rule-desc">Post things in the right place (e.g., help in help, casual talk in general).</p>
+
+                <h3>6. No Ads or Self-Promotion</h3>
+                <p class="rule-desc">Don’t promote your Discord, YouTube, etc., without media permissions.</p>
+
+                <h3>7. Respect Staff</h3>
+                <p class="rule-desc">If a staff member tells you something, listen. Use tickets for problems.</p>
+
+                <h3>8. No Cheating or Exploits</h3>
+                <p class="rule-desc">Don’t use or share cheats, hacks, or bugs. Play fair.</p>
+
+                <h3>9. Use Tickets for Support</h3>
+                <p class="rule-desc">Use the ticket system for bans, reports, or payments instead of pings.</p>
+
+                <h3>10. No Impersonating</h3>
+                <p class="rule-desc">Don’t pretend to be staff or fake information.</p>
+
+                <h3>11. Follow Discord ToS</h3>
+                <p class="rule-desc">You must follow Discord's Terms of Service and Guidelines.</p>
+
+                <h3>12. No IRL or Cross-Trading</h3>
+                <p class="rule-desc">Trading in-game items for real money or across other games is prohibited.</p>
+
+                <h3>13. No Doxxing or Threats</h3>
+                <p class="rule-desc">Never share private info. Threats lead to a permanent ban.</p>
+
+                <h3>14. Don’t Ping Staff to Troll</h3>
+                <p class="rule-desc">Pinging staff for fake problems or to troll will lead to punishment.</p>
+            </div>
+
+            <hr style="border-color:var(--border-gold); margin: 30px 0;">
+            <p style="text-align:center; font-weight:bold; color:var(--gold);">Rule-breaking will lead to mutes, kicks, warnings, or bans.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function enterSite(){
+    const entry = document.getElementById('entry');
+    entry.style.opacity="0";
+    setTimeout(()=>{
+        entry.style.display="none";
+        document.getElementById('main').style.display="block";
+        document.getElementById('nav').style.display="block";
+        showPage('home');
+    }, 1000);
+}
+
+function showPage(p){
+    document.querySelectorAll('.page').forEach(el => el.style.display='none');
+    document.getElementById(p).style.display='block';
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function copyIP() {
+    const ip = document.getElementById("serverIP").innerText;
+    navigator.clipboard.writeText(ip);
+    const status = document.getElementById("copyStatus");
+    status.innerText = "IP Copied to Scroll!";
+    setTimeout(() => { status.innerText = ""; }, 3000);
+}
+</script>
+
+</body>
+</html>
